@@ -38,7 +38,7 @@ test('Page', () => {
 
 test('render Home heading and About link', () => {
   render (<Page/>);
-  const heading = screen.getByText(/WrongHome/i);
+  const heading = screen.getByText(/Home/i);
   const link = screen.getByRole('link', {name: /About/i});
 
   expect(heading).toBeInTheDocument();
