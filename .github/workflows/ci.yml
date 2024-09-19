@@ -3,7 +3,7 @@ name: Pipeline with Build and Jest Test in 2 Jobs
 on:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   build:
