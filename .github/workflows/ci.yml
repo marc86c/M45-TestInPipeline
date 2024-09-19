@@ -15,13 +15,25 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Build project
+        run: npm run build
+
+      - name: Save node_modules and build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+            node_modules
+            .next # Assuming you're using Next.js or similar build output
+
   tests:
     runs-on: ubuntu-22.04
-    needs: build # Test-Job wartet, bis der Build-Job erfolgreich ist
+    needs: build
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
 
-      - name: Install dependencies and run Test
-        run: npm install
+      - name: Run tests
         run: npm test
